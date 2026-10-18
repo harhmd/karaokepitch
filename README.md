@@ -13,6 +13,11 @@
   - Real-time LED key shift indicator (`−6` to `+6`).
   - **Vocal Reduce**: Center-channel cancellation algorithm to strip vocals from stereo tracks while retaining bass and stereo instruments.
   - A/B instant audio comparison switch (`Original` vs. `New Key`).
+- 📺 **YouTube Live Pitch Changer**:
+  - Live real-time YouTube pitch changer using browser AudioWorklet DSP.
+  - Paste any YouTube link, Shorts, or video ID to embed and play.
+  - Quick shifts (−12, −7, −5, 0, +5, +7, +12), fine-tuning cents, and custom song key selector.
+  - 100% in-browser audio routing without downloading or re-encoding video.
 - 🎛️ **Pro Pitch & Tempo Shifter**:
   - Continuous pitch shift range from **−24 to +24 semitones** (±2 full octaves).
   - Fine-tuning control in **cents** (−50 to +50 cents, 100 cents = 1 semitone).

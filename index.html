@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KaraokePitch – Free Online Audio & Karaoke Pitch Changer</title>
-  <meta name="description" content="Change the pitch and key of any song or karaoke track in your browser. Pitch shift -24 to +24 semitones, karaoke key buttons, vocal reduce, tempo control, and export to MP3 or WAV without uploading files.">
+  <title>KaraokePitch – Free Online Audio, Karaoke & YouTube Pitch Changer</title>
+  <meta name="description" content="Change the pitch and key of any song, karaoke track, or YouTube video in your browser. Pitch shift -24 to +24 semitones, live YouTube pitch change, vocal reduce, tempo control, and export to MP3 or WAV without uploading files.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎤</text></svg>">
   
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="assets/pitch-changer-tool-final.css">
   <link rel="stylesheet" href="assets/opc-karaoke-pitch-changer.css">
+  <link rel="stylesheet" href="assets/opc-youtube-pitch-changer.css">
   
   <style>
     :root {
@@ -79,16 +80,17 @@
 
     .nav-links {
       display: flex;
-      gap: 18px;
+      gap: 16px;
       list-style: none;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-links a {
       color: #94a3b8;
       text-decoration: none;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14.5px;
       transition: color 0.15s ease;
     }
 
@@ -120,11 +122,11 @@
       background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
       color: #fff;
       text-align: center;
-      padding: 44px 20px 36px;
+      padding: 40px 20px 32px;
     }
 
     .hero-banner h1 {
-      font-size: 38px;
+      font-size: 36px;
       font-weight: 800;
       letter-spacing: -0.02em;
       margin-bottom: 10px;
@@ -134,10 +136,10 @@
     }
 
     .hero-banner p {
-      font-size: 18px;
+      font-size: 17px;
       color: #94a3b8;
-      max-width: 680px;
-      margin: 0 auto 24px;
+      max-width: 720px;
+      margin: 0 auto 20px;
     }
 
     /* Tool Tabs Bar */
@@ -163,8 +165,8 @@
     .tab-btn {
       border: none;
       background: transparent;
-      padding: 10px 20px;
-      font-size: 15px;
+      padding: 10px 18px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #475569;
       border-radius: 10px;
@@ -383,10 +385,10 @@
 
     @media (max-width: 768px) {
       .hero-banner h1 { font-size: 28px; }
-      .hero-banner p { font-size: 16px; }
+      .hero-banner p { font-size: 15px; }
       .nav-container { flex-direction: column; gap: 12px; }
       .tab-nav { width: 100%; }
-      .tab-btn { flex: 1; justify-content: center; padding: 10px 12px; font-size: 14px; }
+      .tab-btn { flex: 1; justify-content: center; padding: 10px 12px; font-size: 13.5px; }
     }
   </style>
 </head>
@@ -401,7 +403,8 @@
       </a>
       <ul class="nav-links">
         <li><a href="#karaoke" class="nav-tab-link active" onclick="switchTab('karaoke', event)">Karaoke Machine</a></li>
-        <li><a href="#pro" class="nav-tab-link" onclick="switchTab('pro', event)">Pro Pitch & Tempo</a></li>
+        <li><a href="#youtube" class="nav-tab-link" onclick="switchTab('youtube', event)">YouTube Pitch</a></li>
+        <li><a href="#pro" class="nav-tab-link" onclick="switchTab('pro', event)">Pro Pitch & Speed</a></li>
         <li><a href="#calculator" class="nav-tab-link" onclick="switchTab('calculator', event)">Semitone Calculator</a></li>
         <li><a href="#faq" class="nav-tab-link" onclick="switchTab('faq', event)">FAQ</a></li>
         <li>
@@ -416,8 +419,8 @@
 
   <!-- Hero Header -->
   <section class="hero-banner">
-    <h1>Change Any Song's Pitch & Key Online</h1>
-    <p>Client-side high-fidelity audio pitch shifting, karaoke key transposition, tempo adjustment, and vocal reduction. Runs 100% locally in your browser.</p>
+    <h1>Change Any Song or YouTube Video's Pitch Online</h1>
+    <p>Client-side real-time pitch shifting, karaoke key transposing, YouTube audio pitch changing, tempo adjustment, and vocal reduction. Runs 100% locally in your browser.</p>
   </section>
 
   <!-- Tab Buttons -->
@@ -426,11 +429,14 @@
       <button type="button" class="tab-btn active" id="tab-btn-karaoke" onclick="switchTab('karaoke', event)">
         🎤 Karaoke Key Machine
       </button>
+      <button type="button" class="tab-btn" id="tab-btn-youtube" onclick="switchTab('youtube', event)">
+        📺 YouTube Pitch Changer
+      </button>
       <button type="button" class="tab-btn" id="tab-btn-pro" onclick="switchTab('pro', event)">
         🎛️ Pro Pitch & Speed (±24 st)
       </button>
       <button type="button" class="tab-btn" id="tab-btn-calculator" onclick="switchTab('calculator', event)">
-        📐 Semitone Calculator & Key Chart
+        📐 Key Calculator & Chart
       </button>
       <button type="button" class="tab-btn" id="tab-btn-faq" onclick="switchTab('faq', event)">
         💡 How It Works & FAQ
@@ -570,7 +576,112 @@
       </div>
     </div>
 
-    <!-- ==================== TAB 2: PRO PITCH & TEMPO ==================== -->
+    <!-- ==================== TAB 2: YOUTUBE PITCH CHANGER ==================== -->
+    <div class="tab-panel" id="panel-youtube">
+      
+      <!-- YouTube Pitch Changer Section (Exact copy of opc-yt) -->
+      <section class="opc-yt" id="opc-yt-1" data-opc-yt data-cfg='{"worklet":"assets/opc-yt-worklet.js"}' aria-labelledby="opc-yt-1-title">
+        <div class="opc-yt-head">
+          <h2 class="opc-yt-title" id="opc-yt-1-title">Change the Pitch of a YouTube Video Live</h2>
+          <p class="opc-yt-lead">Paste a YouTube link, play the video, then press <b>Start live pitch change</b> and move the key with ♭ and ♯ in real-time.</p>
+        </div>
+        
+        <form class="opc-yt-form" data-yt-form novalidate>
+          <label class="opc-yt-label" for="opc-yt-1-url">YouTube link or video ID</label>
+          <div class="opc-yt-urlrow">
+            <input id="opc-yt-1-url" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="https://www.youtube.com/watch?v=…" data-yt-url aria-describedby="opc-yt-1-urlmsg">
+            <button type="submit" class="opc-yt-btn opc-yt-load">Load video</button>
+          </div>
+          <p class="opc-yt-hint" id="opc-yt-1-urlmsg" data-yt-urlmsg>Works with youtube.com, youtu.be, Shorts and music.youtube.com links.</p>
+        </form>
+
+        <div class="opc-yt-grid">
+          <div class="opc-yt-stage">
+            <div class="opc-yt-player" data-yt-player>
+              <div class="opc-yt-ph"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5v14l11-7z"/></svg><p>The video plays here, in YouTube's own player.</p></div>
+            </div>
+            <p class="opc-yt-vinfo" data-yt-vinfo hidden><strong data-yt-vtitle></strong> <span class="opc-yt-vid">Video ID: <code data-yt-vid></code></span></p>
+          </div>
+          
+          <div class="opc-yt-desk">
+            <div class="opc-yt-keyrow">
+              <button type="button" class="opc-yt-step" data-yt-step="-1" aria-label="Lower the pitch by 1 semitone">♭<span>−1</span></button>
+              <p class="opc-yt-read" aria-live="polite" aria-atomic="true"><output data-yt-st>0</output> <span class="opc-yt-unit" data-yt-unit>semitones</span><span class="opc-yt-ivl" data-yt-ivl>original pitch</span></p>
+              <button type="button" class="opc-yt-step" data-yt-step="1" aria-label="Raise the pitch by 1 semitone">♯<span>+1</span></button>
+            </div>
+            <label class="opc-yt-slabel" for="opc-yt-1-range">Pitch shift <span>(semitones, −12 to +12)</span></label>
+            <input id="opc-yt-1-range" class="opc-yt-range" type="range" min="-12" max="12" step="1" value="0" data-yt-range>
+            <div class="opc-yt-presets" role="group" aria-label="Quick shifts in semitones">
+              <button type="button" data-yt-preset="-12" aria-pressed="false">−12</button><button type="button" data-yt-preset="-7" aria-pressed="false">−7</button><button type="button" data-yt-preset="-5" aria-pressed="false">−5</button><button type="button" data-yt-preset="0" aria-pressed="true">0</button><button type="button" data-yt-preset="5" aria-pressed="false">+5</button><button type="button" data-yt-preset="7" aria-pressed="false">+7</button><button type="button" data-yt-preset="12" aria-pressed="false">+12</button>
+            </div>
+            <div class="opc-yt-keypick">
+              <label class="opc-yt-slabel" for="opc-yt-1-key">Song key <span>(optional)</span></label>
+              <select id="opc-yt-1-key" data-yt-key>
+                <option value="">Not set</option>
+                <optgroup label="Major keys"><option value="0_0">C major</option><option value="1_0">D♭ major</option><option value="2_0">D major</option><option value="3_0">E♭ major</option><option value="4_0">E major</option><option value="5_0">F major</option><option value="6_0">F♯ major</option><option value="7_0">G major</option><option value="8_0">A♭ major</option><option value="9_0">A major</option><option value="10_0">B♭ major</option><option value="11_0">B major</option></optgroup>
+                <optgroup label="Minor keys"><option value="0_1">C minor</option><option value="1_1">C♯ minor</option><option value="2_1">D minor</option><option value="3_1">E♭ minor</option><option value="4_1">E minor</option><option value="5_1">F minor</option><option value="6_1">F♯ minor</option><option value="7_1">G minor</option><option value="8_1">G♯ minor</option><option value="9_1">A minor</option><option value="10_1">B♭ minor</option><option value="11_1">B minor</option></optgroup>
+              </select>
+              <p class="opc-yt-newkey" data-yt-newkey>New key: C (if the song is in C)</p>
+            </div>
+            <div class="opc-yt-live">
+              <button type="button" class="opc-yt-go" data-yt-go>Start live pitch change</button>
+              <div class="opc-yt-liverow" data-yt-liverow hidden>
+                <button type="button" class="opc-yt-ab" data-yt-ab aria-pressed="false">Hear original</button>
+                <button type="button" class="opc-yt-stop" data-yt-stop>Stop</button>
+              </div>
+              <p class="opc-yt-status" data-yt-status aria-live="polite">Off. Load a video, press play, then start the live pitch change.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="opc-yt-alt" data-yt-alt hidden>
+          <p class="opc-yt-alttitle" data-yt-alttitle>Live pitch change is not available in this browser</p>
+          <p data-yt-alttext>It needs Chrome or Edge on a computer. You can still watch the video and plan the new key here.</p>
+          <p>Have the video or song as a file? Change its pitch in the <a href="#" onclick="switchTab('pro', event)">Pro Pitch & Speed Shifter</a> or the <a href="#" onclick="switchTab('karaoke', event)">Karaoke Key Machine</a>.</p>
+        </div>
+
+        <details class="opc-yt-more" data-yt-more>
+          <summary>More options: fine-tune, video speed, practice tips</summary>
+          <div class="opc-yt-morebody">
+            <div class="opc-yt-field">
+              <label class="opc-yt-slabel" for="opc-yt-1-cents">Fine-tune <span>(cents, −50 to +50)</span> <output data-yt-cout>0</output></label>
+              <input id="opc-yt-1-cents" class="opc-yt-range opc-yt-range2" type="range" min="-50" max="50" step="1" value="0" data-yt-cents>
+            </div>
+            <div class="opc-yt-field">
+              <label class="opc-yt-slabel" for="opc-yt-1-speed">Video speed <span>(YouTube keeps its pitch)</span></label>
+              <select id="opc-yt-1-speed" data-yt-speed disabled><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected='selected'>1× (normal)</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="1.75">1.75×</option><option value="2">2×</option></select>
+            </div>
+            <div class="opc-yt-field">
+              <label class="opc-yt-slabel" for="opc-yt-1-use">What are you learning?</label>
+              <select id="opc-yt-1-use" data-yt-use><option value="">Choose for a tip</option><option value="singer">Singing along</option><option value="guitar">Guitar tutorial</option><option value="piano">Piano tutorial</option><option value="vocal">Vocal lesson</option><option value="band">Band practice</option><option value="theory">Music theory</option></select>
+              <p class="opc-yt-tip" data-yt-tip aria-live="polite" hidden></p>
+            </div>
+          </div>
+        </details>
+        <noscript><p class="opc-yt-hint">This tool needs JavaScript.</p></noscript>
+      </section>
+
+      <!-- YouTube Guide & Technical Notes -->
+      <div class="feature-card">
+        <h2>How the YouTube Real-Time Pitch Changer Works</h2>
+        <div class="feature-grid">
+          <div class="feature-item">
+            <h3>🌐 Browser-Based Audio Routing</h3>
+            <p>Using Google Chrome or Microsoft Edge with the AudioWorklet DSP, your browser routes the tab audio through our real-time phase-locked vocoder without uploading or downloading the video.</p>
+          </div>
+          <div class="feature-item">
+            <h3>⚡ Phase-Locked Vocoder Engine</h3>
+            <p>Every 43 milliseconds, the worklet transforms the audio into the frequency domain, transposes the pitch classes by 2<sup>n/12</sup>, and rebuilds the waveform with steady stereo imaging and zero tempo drift.</p>
+          </div>
+          <div class="feature-item">
+            <h3>🎸 Practice Along Instantly</h3>
+            <p>Ideal for rehearsing with karaoke backing tracks, guitar tutorials, vocal warm-ups, or transposing a song into your preferred vocal range directly from YouTube.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: PRO PITCH & TEMPO ==================== -->
     <div class="tab-panel" id="panel-pro">
       
       <!-- Full Pitch Changer Widget (opc-pc) -->
@@ -684,7 +795,7 @@
       </section>
     </div>
 
-    <!-- ==================== TAB 3: SEMITONE CALCULATOR & CHART ==================== -->
+    <!-- ==================== TAB 4: SEMITONE CALCULATOR & CHART ==================== -->
     <div class="tab-panel" id="panel-calculator">
       <div class="feature-card" style="margin-top:0;">
         <h2>Interactive Semitone & Key Transposition Calculator</h2>
@@ -772,12 +883,17 @@
       </div>
     </div>
 
-    <!-- ==================== TAB 4: HOW IT WORKS & FAQ ==================== -->
+    <!-- ==================== TAB 5: HOW IT WORKS & FAQ ==================== -->
     <div class="tab-panel" id="panel-faq">
       <div class="feature-card" style="margin-top:0;">
         <h2>Frequently Asked Questions</h2>
         
         <div style="margin-top:20px; display:flex; flex-direction:column; gap:20px;">
+          <div>
+            <h3 style="font-size:18px; color:var(--kp-dark); margin-bottom:6px;">How does the YouTube Pitch Changer work?</h3>
+            <p style="color:#475569;">The YouTube tool uses your browser's AudioWorklet DSP to capture the playing audio stream of your tab in real-time, shifts the frequency in memory using a phase-locked vocoder, and outputs the audio smoothly without ever downloading or modifying the video itself.</p>
+          </div>
+
           <div>
             <h3 style="font-size:18px; color:var(--kp-dark); margin-bottom:6px;">Does shifting pitch change the duration or speed of my song?</h3>
             <p style="color:#475569;">No. The phase vocoder and time-stretching algorithms maintain the tempo 100% steady while transposing musical frequencies. If you do want to speed up or slow down the song, you can use the independent Tempo control.</p>
@@ -797,11 +913,6 @@
             <h3 style="font-size:18px; color:var(--kp-dark); margin-bottom:6px;">How does Vocal Reduction work?</h3>
             <p style="color:#475569;">Most commercial music is mixed with the lead vocal panned dead-center, while drums, synthesizers, and guitars are spread across stereo channels. Vocal reduction inverts phase between left and right channels while applying a low-pass crossover to keep bass and kick intact.</p>
           </div>
-
-          <div>
-            <h3 style="font-size:18px; color:var(--kp-dark); margin-bottom:6px;">Which audio formats are supported?</h3>
-            <p style="color:#475569;">KaraokePitch opens MP3, WAV, M4A, AAC, OGG, FLAC, and can extract audio directly from MP4, MOV, and WebM video files.</p>
-          </div>
         </div>
       </div>
     </div>
@@ -813,10 +924,11 @@
     <div class="footer-inner">
       <div>
         <strong style="color:#fff; font-size:16px;">🎤 KaraokePitch</strong>
-        <p style="margin-top:4px;">Open-source in-browser pitch shifting & karaoke tools.</p>
+        <p style="margin-top:4px;">Open-source in-browser pitch shifting, karaoke & YouTube tools.</p>
       </div>
       <ul class="footer-links">
         <li><a href="#" onclick="switchTab('karaoke', event)">Karaoke Key</a></li>
+        <li><a href="#" onclick="switchTab('youtube', event)">YouTube Pitch</a></li>
         <li><a href="#" onclick="switchTab('pro', event)">Pro Shifter</a></li>
         <li><a href="#" onclick="switchTab('calculator', event)">Key Calculator</a></li>
         <li><a href="https://github.com" target="_blank">GitHub Repo</a></li>
@@ -827,13 +939,14 @@
   <!-- Scripts -->
   <script src="assets/pitch-changer-tool-final.js"></script>
   <script src="assets/opc-karaoke-pitch-changer.js"></script>
+  <script src="assets/opc-youtube-pitch-changer.js"></script>
 
   <script>
     // Tab Switching Logic
     function switchTab(tabId, ev) {
       if (ev) ev.preventDefault();
       
-      const tabs = ['karaoke', 'pro', 'calculator', 'faq'];
+      const tabs = ['karaoke', 'youtube', 'pro', 'calculator', 'faq'];
       tabs.forEach(t => {
         const panel = document.getElementById('panel-' + t);
         const btn = document.getElementById('tab-btn-' + t);

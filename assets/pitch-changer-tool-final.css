@@ -1,0 +1,154 @@
+/* Online Pitch Changer 2.0.0 (homepage tool) | onlinepitchchanger.com | brand: #0067FF primary, #22B8F0 accent, #0F172A navy.
+   Readability: sizes in px (themes such as Astra shrink rem), help text >= 15px, labels >= 13px, all text >= 4.5:1 contrast.
+   Drop zone stays above the fold on a 390px phone: no fixed heights taller than needed, single column below 880px. */
+.opc-pc{--pc-blue:#0067ff;--pc-blue2:#0052cc;--pc-cyan:#22b8f0;--pc-navy:#0f172a;--pc-navy2:#1e293b;--pc-text:#334155;--pc-muted:#475569;--pc-light:#f0f7ff;--pc-line:#d6e4f5;--pc-ok:#15803d;--pc-warn:#b45309;--pc-err:#b91c1c;
+	max-width:1040px;margin:0 auto 1.75em;color:var(--pc-text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;box-sizing:border-box;text-align:left}
+.opc-pc *,.opc-pc *::before,.opc-pc *::after{box-sizing:border-box}
+.opc-pc [hidden]{display:none!important}
+.opc-pc p,.opc-pc dl,.opc-pc dd,.opc-pc h2,.opc-pc h3{margin:0}
+.opc-pc button,.opc-pc select,.opc-pc input{font:inherit;letter-spacing:normal;text-transform:none;box-shadow:none;margin:0}
+.opc-pc button{cursor:pointer;line-height:1.2}
+.opc-pc button:disabled{cursor:not-allowed}
+.opc-pc :focus-visible{outline:3px solid var(--pc-blue);outline-offset:2px}
+.opc-pc-head{margin:0 0 12px}
+.opc-pc-title{margin:0;font-size:24px;line-height:1.25;font-weight:800;color:var(--pc-navy);letter-spacing:-.01em}
+.opc-pc-lead{margin:4px 0 0;color:var(--pc-muted);font-size:16px}
+.opc-pc-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.opc-pc-label{display:block;font-size:15px;font-weight:700;color:var(--pc-navy);margin:0 0 4px}
+.opc-pc-unit{font-weight:600;color:var(--pc-muted)}
+.opc-pc-hint{display:block;margin:4px 0 0;font-size:15px;line-height:1.45;color:var(--pc-muted)}
+.opc-pc-stepno{display:inline-block;margin-right:6px;padding:2px 8px;border-radius:99px;background:var(--pc-navy);color:#fff;font-size:13px;font-weight:800;letter-spacing:.02em;vertical-align:2px}
+
+/* Step 1: drop zone (kept simple and compact so it fits above the fold on a 390px phone) */
+.opc-pc-drop{position:relative;border:2px dashed #9cc3f5;border-radius:16px;background:var(--pc-light);padding:12px;transition:border-color .15s,background .15s}
+.opc-pc.is-drag .opc-pc-drop{border-color:var(--pc-blue);background:#e3efff}
+.opc-pc-file{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
+.opc-pc-droplabel{display:flex;align-items:center;gap:14px;min-height:88px;padding:12px 14px;border-radius:12px;background:var(--pc-blue);color:#fff;cursor:pointer;margin:0;transition:background .15s}
+.opc-pc-droplabel:hover{background:var(--pc-blue2)}
+.opc-pc-file:focus-visible+.opc-pc-droplabel{outline:3px solid var(--pc-navy);outline-offset:3px}
+.opc-pc-dropicon{flex:0 0 36px;width:36px;height:36px;color:#fff}
+.opc-pc-droptext{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0}
+.opc-pc-droplabel .opc-pc-stepno{background:#fff;color:var(--pc-blue2)}
+.opc-pc-droptext strong{font-size:19px;line-height:1.25;color:#fff}
+.opc-pc-dropsub{font-size:14px;color:#fff;line-height:1.4}
+.opc-pc-private{display:flex;align-items:flex-start;gap:6px;margin-top:8px;font-size:14px;color:var(--pc-muted)}
+.opc-pc-private svg{width:15px;height:15px;color:var(--pc-ok);flex:0 0 15px;margin-top:3px}
+.opc-pc-bar{height:8px;border-radius:99px;background:#dbe7f7;overflow:hidden;margin-top:8px}
+.opc-pc-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pc-blue),var(--pc-cyan));transition:width .2s}
+.opc-pc-bar.is-busy span{width:35%!important;animation:opc-pc-slide 1.2s linear infinite}
+@keyframes opc-pc-slide{from{transform:translateX(-100%)}to{transform:translateX(300%)}}
+.opc-pc-status{margin-top:6px;font-size:15px;color:var(--pc-navy);min-height:1.5em}
+.opc-pc-status[data-kind=busy]{color:var(--pc-navy);font-weight:600}
+.opc-pc-status[data-kind=ok]{color:var(--pc-ok);font-weight:600}
+.opc-pc-status[data-kind=ok]::before{content:"\2713 "}
+.opc-pc-status[data-kind=error]{color:var(--pc-err);font-weight:700}
+.opc-pc-status[data-kind=error]::before{content:"\26A0 "}
+.opc-pc.is-loaded .opc-pc-droplabel{min-height:56px;padding:8px 12px;background:#fff;color:var(--pc-blue2);border:1px solid #9cc3f5}
+.opc-pc.is-loaded .opc-pc-droplabel:hover{background:#e3efff}
+.opc-pc.is-loaded .opc-pc-droptext strong{color:var(--pc-navy);font-size:16px}
+.opc-pc.is-loaded .opc-pc-dropsub,.opc-pc.is-loaded .opc-pc-droplabel .opc-pc-stepno{display:none}
+.opc-pc.is-loaded .opc-pc-dropicon{width:26px;height:26px;flex-basis:26px;color:var(--pc-blue)}
+
+/* cards */
+.opc-pc-card{border:1px solid var(--pc-line);border-radius:16px;background:#fff;padding:14px}
+.opc-pc-h3{margin:0 0 6px;font-size:17px;line-height:1.3;font-weight:800;color:var(--pc-navy)}
+.opc-pc-bigkey{font-size:26px;line-height:1.2;font-weight:800;color:var(--pc-navy)}
+.opc-pc-bigkey output{display:inline}
+.opc-pc-bigkey[data-kind=empty]{font-size:18px;color:var(--pc-muted);font-weight:700}
+.opc-pc-bigkey[data-kind=same]{font-size:18px;color:var(--pc-muted)}
+.opc-pc-keymeta{margin-top:4px;font-size:15px;color:var(--pc-text);min-height:1.5em}
+.opc-pc-keymeta b{color:var(--pc-navy)}
+.opc-pc-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:10px 0 0}
+.opc-pc-facts div{padding:6px 10px;border-radius:10px;background:var(--pc-light);min-width:0}
+.opc-pc-facts .opc-pc-factwide{grid-column:1/-1}
+.opc-pc-facts dt{font-size:13px;font-weight:700;color:var(--pc-muted)}
+.opc-pc-facts dd{margin:0;font-weight:700;color:var(--pc-navy);font-size:15px;overflow-wrap:anywhere}
+
+/* player */
+.opc-pc-player{border-radius:16px;background:var(--pc-navy);padding:12px;color:#fff}
+.opc-pc-now{min-height:1.5em;margin:0 0 8px;font-size:16px;font-weight:700;color:#fff}
+.opc-pc-now b{color:var(--pc-cyan)}
+.opc-pc-now[data-which=a] b{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.opc-pc-wave{position:relative;height:88px;border-radius:10px;background:#0b1224;overflow:hidden;cursor:pointer;touch-action:pan-y;box-shadow:inset 0 0 0 1px #334155}
+.opc-pc-wave canvas{display:block;width:100%;height:100%}
+.opc-pc-wave:focus-visible{outline:3px solid var(--pc-cyan);outline-offset:2px}
+.opc-pc-waveempty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#cbd5e1;font-size:15px;text-align:center;padding:0 12px}
+.opc-pc-transport{display:flex;align-items:flex-end;flex-wrap:wrap;gap:10px 14px;margin-top:10px}
+.opc-pc-play{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 20px 0 14px;border-radius:99px;border:0;background:var(--pc-blue);color:#fff;font-weight:800;font-size:17px}
+.opc-pc-play:hover,.opc-pc-play:focus{background:var(--pc-blue2);color:#fff}
+.opc-pc-play:disabled{background:#334155;color:#cbd5e1}
+.opc-pc-play svg{width:24px;height:24px;fill:currentColor}
+.opc-pc-play:focus-visible{outline-color:var(--pc-cyan)}
+.opc-pc-abwrap{display:flex;flex-direction:column;gap:2px}
+.opc-pc-ablabel{font-size:13px;font-weight:700;color:#cbd5e1}
+.opc-pc-seg{display:inline-flex;flex-wrap:wrap;border-radius:12px;padding:3px;gap:3px;background:#e8f0fb}
+.opc-pc-seg button{min-height:44px;padding:0 14px;border:0;border-radius:9px;background:transparent;color:var(--pc-navy);font-weight:700;font-size:15px;white-space:nowrap}
+.opc-pc-seg button:hover,.opc-pc-seg button:focus{background:#d7e6fb;color:var(--pc-navy)}
+.opc-pc-seg button[aria-checked=true]{background:var(--pc-blue);color:#fff}
+.opc-pc-seg button[aria-checked=true]::before{content:"\25CF ";font-size:.8em}
+.opc-pc-ab{background:#1e293b}
+.opc-pc-ab button{color:#e2e8f0}
+.opc-pc-ab button:hover,.opc-pc-ab button:focus{background:#334155;color:#fff}
+.opc-pc-ab button[aria-checked=true]{background:var(--pc-cyan);color:var(--pc-navy)}
+.opc-pc-ab button[data-pc-ab=a][aria-checked=true]{background:#fff;color:var(--pc-navy)}
+.opc-pc-ab button:focus-visible{outline-color:var(--pc-cyan)}
+.opc-pc-time{margin-left:auto;font-variant-numeric:tabular-nums;color:#e2e8f0;font-size:16px;font-weight:600;padding-bottom:12px}
+
+/* Step 2: pitch + tempo controls */
+.opc-pc-steprow{margin-bottom:12px}
+.opc-pc-stepper{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}
+.opc-pc-step{display:inline-grid;place-items:center;min-width:52px;height:44px;padding:0 8px;border-radius:12px;border:1px solid #94a3b8;background:#fff;color:var(--pc-navy);font-size:17px;font-weight:800}
+.opc-pc-step:hover,.opc-pc-step:focus{background:var(--pc-light);color:var(--pc-navy)}
+.opc-pc-range{display:block;margin:0}
+.opc-pc-range output{font-weight:800;color:var(--pc-blue2)}
+.opc-pc .opc-pc-range input{display:block;width:100%;height:44px;min-height:44px;accent-color:var(--pc-blue);margin:0;padding:0;border:0;background:transparent}
+.opc-pc-sbtn{min-height:44px;padding:0 14px;border-radius:10px;border:1px solid #64748b;background:transparent;color:var(--pc-navy);font-weight:700;font-size:15px}
+.opc-pc-sbtn:hover,.opc-pc-sbtn:focus{background:var(--pc-light);color:var(--pc-navy)}
+.opc-pc-sbtn:disabled{color:#94a3b8;border-color:#cbd5e1}
+.opc-pc-reset{margin-top:4px}
+
+/* Step 3: export */
+.opc-pc-fmt{margin:0 0 10px}
+.opc-pc-dl{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:52px;padding:0 18px;border:0;border-radius:12px;background:var(--pc-blue);color:#fff;font-weight:800;font-size:17.5px}
+.opc-pc-dl:hover,.opc-pc-dl:focus{background:var(--pc-blue2);color:#fff}
+.opc-pc-dl:disabled{background:#cbd5e1;color:#334155}
+.opc-pc-dl svg{width:22px;height:22px}
+.opc-pc-dlinfo{margin-top:8px;font-size:15px;color:var(--pc-text);overflow-wrap:anywhere;min-height:1.5em}
+.opc-pc-dlinfo b{color:var(--pc-navy)}
+.opc-pc-savewrap{margin-top:8px}
+.opc-pc-save{display:inline-flex;align-items:center;min-height:44px;font-weight:700;color:var(--pc-blue2);overflow-wrap:anywhere}
+
+/* More options */
+.opc-pc-more{border:1px solid var(--pc-line);border-radius:16px;background:#fff;padding:4px 14px;margin-top:12px}
+.opc-pc-more summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;font-weight:800;color:var(--pc-navy);font-size:16px;list-style:none}
+.opc-pc-more summary::-webkit-details-marker{display:none}
+.opc-pc-more summary::before{content:"+";display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--pc-light);color:var(--pc-blue2);font-weight:800}
+.opc-pc-more[open] summary::before{content:"\2212"}
+.opc-pc-more summary span{font-weight:600;color:var(--pc-muted);font-size:14px}
+.opc-pc-moregrid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;padding:4px 0 16px}
+.opc-pc-switch{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:4px 14px 4px 6px;border:1px solid #94a3b8;border-radius:99px;background:#fff;color:var(--pc-navy);font-weight:700;font-size:15px;margin-top:2px}
+.opc-pc-knob{position:relative;width:44px;height:26px;border-radius:99px;background:#94a3b8;transition:background .15s;flex:0 0 44px}
+.opc-pc-knob::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s}
+.opc-pc-switch[aria-checked=true] .opc-pc-knob{background:var(--pc-blue)}
+.opc-pc-switch[aria-checked=true] .opc-pc-knob::after{transform:translateX(18px)}
+
+/* wider screens: two-column studio layout */
+@media (min-width:600px){
+	.opc-pc-facts{grid-template-columns:repeat(3,minmax(0,1fr))}
+	.opc-pc-facts .opc-pc-factwide{grid-column:auto}
+	.opc-pc-moregrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:880px){
+	.opc-pc-title{font-size:28px}
+	.opc-pc-grid{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-areas:"drop song" "player player" "controls export";gap:14px}
+	.opc-pc-drop{grid-area:drop;align-self:start}
+	.opc-pc-song{grid-area:song}
+	.opc-pc-player{grid-area:player}
+	.opc-pc-controls{grid-area:controls}
+	.opc-pc-export{grid-area:export;align-self:start}
+	.opc-pc-droplabel{min-height:110px}
+	.opc-pc-wave{height:110px}
+	.opc-pc-card{padding:18px}
+	.opc-pc-bigkey{font-size:30px}
+}
+@media (prefers-reduced-motion:reduce){.opc-pc *{transition:none!important;animation:none!important}}

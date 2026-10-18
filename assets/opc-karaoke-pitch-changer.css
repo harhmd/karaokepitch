@@ -1,0 +1,144 @@
+/* Karaoke Pitch Changer 1.0.0 | onlinepitchchanger.com | karaoke-machine layout: dark console, LED key screen, big ♭ / ♯ buttons.
+   Brand: #0067FF primary, #22B8F0 accent (LED), #0F172A navy. Sizes in px (themes shrink rem); text ≥ 15px, labels ≥ 13px; contrast ≥ 4.5:1. */
+.opc-kp{--k-blue:#0067ff;--k-blue2:#0052cc;--k-cyan:#22b8f0;--k-navy:#0f172a;--k-navy2:#1e293b;--k-screen:#020617;--k-text:#334155;--k-muted:#475569;--k-light:#f0f7ff;--k-line:#d6e4f5;--k-ok:#15803d;
+	max-width:800px;margin:0 auto 1.75em;color:var(--k-text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;box-sizing:border-box;text-align:left}
+.opc-kp *,.opc-kp *::before,.opc-kp *::after{box-sizing:border-box}
+.opc-kp [hidden]{display:none!important}
+section.opc-kp.opc-kp{max-width:800px;margin-left:auto;margin-right:auto}
+.opc-kp p,.opc-kp dl,.opc-kp dd,.opc-kp dt,.opc-kp h2{margin:0}
+.opc-kp :where(button,select,input){font:inherit;letter-spacing:normal;text-transform:none;box-shadow:none;margin:0}
+.opc-kp button{cursor:pointer;line-height:1.2}
+.opc-kp button:disabled{cursor:not-allowed}
+.opc-kp :focus-visible{outline:3px solid var(--k-blue);outline-offset:2px}
+.opc-kp-head{margin:0 0 12px}
+.opc-kp-title{margin:0;font-size:24px;line-height:1.25;font-weight:800;color:var(--k-navy);letter-spacing:-.01em}
+.opc-kp-lead{margin:4px 0 0;color:var(--k-muted);font-size:16px}
+
+/* ---------- the machine (dark console) ---------- */
+.opc-kp-machine{border-radius:22px;background:linear-gradient(180deg,#1e293b 0,#0f172a 46px);color:#fff;padding:14px;box-shadow:0 0 0 1px #334155 inset,0 10px 24px rgba(15,23,42,.18);transition:box-shadow .15s}
+.opc-kp.is-drag .opc-kp-machine{box-shadow:0 0 0 3px var(--k-cyan) inset}
+.opc-kp .opc-kp-machine :focus-visible{outline-color:var(--k-cyan)}
+.opc-kp-file{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip:rect(0 0 0 0)}
+.opc-kp-open{display:flex;width:100%;align-items:center;gap:12px;min-height:84px;padding:10px 14px;margin:0;border-radius:14px;background:var(--k-blue);color:#fff;cursor:pointer;transition:background .15s}
+.opc-kp-open:hover{background:var(--k-blue2)}
+.opc-kp-file:focus-visible+.opc-kp-open{outline:3px solid var(--k-cyan);outline-offset:3px}
+.opc-kp-open svg{flex:0 0 34px;width:34px;height:34px}
+.opc-kp-opentext{display:flex;flex-direction:column;gap:2px;min-width:0}
+.opc-kp-opentext strong{font-size:20px;line-height:1.25;color:#fff}
+.opc-kp-opensub{font-size:15px;line-height:1.4;color:#fff}
+.opc-kp.is-loaded .opc-kp-open{min-height:52px;padding:6px 12px;background:transparent;border:1px solid var(--k-blue);color:#fff}
+.opc-kp.is-loaded .opc-kp-open:hover{background:var(--k-navy2)}
+.opc-kp.is-loaded .opc-kp-opentext strong{font-size:16px}
+.opc-kp.is-loaded .opc-kp-opensub{display:none}
+.opc-kp.is-loaded .opc-kp-open svg{width:24px;height:24px;flex-basis:24px;color:var(--k-cyan)}
+.opc-kp-private{display:flex;align-items:flex-start;gap:6px;margin-top:8px;font-size:15px;color:#cbd5e1}
+.opc-kp-private svg{width:16px;height:16px;flex:0 0 16px;margin-top:3px;color:#4ade80}
+.opc-kp-bar{height:8px;border-radius:99px;background:#dbe7f7;overflow:hidden;margin-top:8px}
+.opc-kp-machine .opc-kp-bar{background:#334155}
+.opc-kp-bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--k-blue),var(--k-cyan));transition:width .2s}
+.opc-kp-bar.is-busy span{width:35%!important;animation:opc-kp-slide 1.2s linear infinite}
+@keyframes opc-kp-slide{from{transform:translateX(-100%)}to{transform:translateX(300%)}}
+.opc-kp-status{margin-top:6px;font-size:15px;color:#e2e8f0;min-height:2.9em}
+.opc-kp-status[data-kind=busy]{font-weight:600}
+.opc-kp-status[data-kind=ok]{color:#4ade80;font-weight:600}
+.opc-kp-status[data-kind=ok]::before{content:"✓ "}
+.opc-kp-status[data-kind=error]{color:#fecaca;font-weight:700;background:#450a0a;border-radius:10px;padding:8px 10px}
+.opc-kp-status[data-kind=error]::before{content:"⚠ "}
+
+/* ---------- LED key screen ---------- */
+.opc-kp-screen{margin:10px 0 12px;padding:12px 14px;border-radius:14px;background:var(--k-screen);box-shadow:inset 0 0 0 2px #1e3a5f,inset 0 0 22px rgba(34,184,240,.12)}
+.opc-kp-track{font-size:15px;font-weight:600;color:#cbd5e1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.opc-kp-keyrow{display:flex;align-items:center;gap:14px;margin-top:4px}
+.opc-kp-keylabel{flex:0 0 auto;padding:4px 10px;border:2px solid var(--k-cyan);border-radius:8px;font-size:16px;font-weight:800;letter-spacing:.12em;color:var(--k-cyan)}
+.opc-kp-keybig{display:flex;flex-direction:column;min-width:0}
+.opc-kp-keybig strong{font:800 52px/1.05 ui-monospace,"Cascadia Mono",Consolas,"SF Mono",monospace;color:#fff;letter-spacing:.02em;text-shadow:0 0 14px rgba(34,184,240,.55)}
+.opc-kp-keybig strong[data-kind=changed]{color:var(--k-cyan)}
+.opc-kp-keybig span{font-size:15px;font-weight:600;color:#e2e8f0}
+.opc-kp-leds{display:flex;justify-content:space-between;gap:4px;margin:12px 0 2px}
+.opc-kp-leds span{flex:1 1 0;max-width:30px;height:12px;border-radius:4px;background:#1e293b;box-shadow:inset 0 0 0 1px #334155}
+.opc-kp-leds span.is-on{background:var(--k-cyan);box-shadow:0 0 8px rgba(34,184,240,.7)}
+.opc-kp-leds span.is-zero{background:#475569}
+.opc-kp-leds span.is-zero.is-on{background:#fff;box-shadow:0 0 6px rgba(255,255,255,.6)}
+.opc-kp-ledscale{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:#cbd5e1}
+.opc-kp-keys{display:flex;align-items:stretch;gap:8px;margin-top:10px}
+.opc-kp-keys>div{flex:1 1 0;min-width:0;padding:8px 10px;border-radius:10px;background:#0f172a;box-shadow:inset 0 0 0 1px #334155}
+.opc-kp-keys>div.opc-kp-arrow{flex:0 0 auto;display:flex;align-items:center;padding:0;background:none;box-shadow:none;font-size:22px;color:#cbd5e1}
+.opc-kp-keys dt{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#cbd5e1}
+.opc-kp-keys dd{font-size:18px;font-weight:800;color:#fff;overflow-wrap:anywhere}
+.opc-kp-keys>div[data-kind=changed] dd{color:var(--k-cyan)}
+.opc-kp-keymeta{margin-top:8px;font-size:15px;color:#e2e8f0}
+
+/* ---------- ♭ / ♯ pad ---------- */
+.opc-kp-pad{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:stretch}
+.opc-kp .opc-kp-kbtn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:76px;padding:6px 10px;border:0;border-radius:18px;background:var(--k-blue);color:#fff;box-shadow:0 4px 0 #0041a3;transition:transform .08s,box-shadow .08s,background .15s}
+.opc-kp .opc-kp-kbtn b{font-size:44px;line-height:1;font-weight:700}
+.opc-kp .opc-kp-kbtn span{font-size:18px;font-weight:800}
+.opc-kp .opc-kp-kbtn:hover,.opc-kp .opc-kp-kbtn:focus{background:var(--k-blue2)}
+.opc-kp .opc-kp-kbtn:active{transform:translateY(3px);box-shadow:0 1px 0 #0041a3}
+.opc-kp .opc-kp-kbtn:disabled{background:#334155;color:#cbd5e1;box-shadow:none;transform:none}
+.opc-kp .opc-kp-reset{min-height:76px;min-width:84px;max-width:110px;padding:6px 10px;border:1px solid #64748b;border-radius:18px;background:transparent;color:#f1f5f9;font-size:15px;font-weight:700}
+.opc-kp .opc-kp-reset:hover,.opc-kp .opc-kp-reset:focus{background:var(--k-navy2)}
+.opc-kp .opc-kp-reset:disabled{color:#94a3b8;border-color:#475569;background:transparent}
+
+/* ---------- transport ---------- */
+.opc-kp-transport{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px}
+.opc-kp .opc-kp-play{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:0 22px;border:0;border-radius:99px;background:#fff;color:var(--k-navy);font-weight:800;font-size:18px}
+.opc-kp .opc-kp-play svg{width:22px;height:22px;fill:currentColor}
+.opc-kp .opc-kp-play:hover,.opc-kp .opc-kp-play:focus{background:#e0f2fe}
+.opc-kp .opc-kp-play:disabled{background:#334155;color:#cbd5e1}
+.opc-kp-abwrap{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.opc-kp-ablabel{font-size:15px;font-weight:700;color:#cbd5e1}
+.opc-kp .opc-kp-seg{display:inline-flex;border-radius:12px;overflow:hidden;border:1px solid #64748b}
+.opc-kp .opc-kp-seg button{min-height:44px;padding:0 14px;border:0;background:transparent;color:#f1f5f9;font-weight:700;font-size:15px}
+.opc-kp .opc-kp-seg button+button{border-left:1px solid #64748b}
+.opc-kp .opc-kp-seg button:hover,.opc-kp .opc-kp-seg button:focus{background:var(--k-navy2);color:#fff}
+.opc-kp .opc-kp-seg button[aria-checked=true]{background:var(--k-cyan);color:var(--k-navy)}
+.opc-kp-seekrow{display:flex;align-items:center;gap:10px;margin-top:10px}
+.opc-kp-seek{flex:1 1 auto;min-width:0;height:44px;accent-color:var(--k-cyan);background:transparent}
+.opc-kp-time{flex:0 0 auto;font:700 15px/1 ui-monospace,Consolas,monospace;color:#e2e8f0}
+.opc-kp-now{min-height:1.5em;margin-top:4px;font-size:15px;font-weight:600;color:#e2e8f0}
+.opc-kp-now b{color:var(--k-cyan)}
+.opc-kp-now[data-which=a] b{color:#fff;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- download ---------- */
+.opc-kp-export{margin-top:14px;padding-top:14px;border-top:1px solid #334155}
+.opc-kp .opc-kp-dl{display:flex;width:100%;align-items:center;justify-content:center;gap:10px;min-height:56px;border:0;border-radius:14px;background:var(--k-blue);color:#fff;font-weight:800;font-size:18px}
+.opc-kp .opc-kp-dl svg{width:24px;height:24px}
+.opc-kp .opc-kp-dl:hover,.opc-kp .opc-kp-dl:focus{background:var(--k-blue2)}
+.opc-kp .opc-kp-dl:disabled{background:#334155;color:#cbd5e1}
+.opc-kp .opc-kp-dlinfo{margin-top:8px;font-size:15px;color:#e2e8f0;overflow-wrap:anywhere}
+.opc-kp .opc-kp-dlinfo b{color:#fff}
+.opc-kp-savewrap{margin-top:6px}
+.opc-kp-save{display:inline-flex;align-items:center;min-height:44px;font-size:15px;font-weight:700;color:#7dd3fc;text-decoration:underline;overflow-wrap:anywhere}
+
+/* ---------- More options ---------- */
+.opc-kp-more{margin-top:12px;border:1px solid var(--k-line);border-radius:14px;background:#fff}
+.opc-kp-more summary{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;min-height:52px;padding:10px 14px;cursor:pointer;font-size:17px;font-weight:800;color:var(--k-navy);list-style:none}
+.opc-kp-more summary::-webkit-details-marker{display:none}
+.opc-kp-more summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;background:var(--k-light);color:var(--k-blue);font-size:20px}
+.opc-kp-more[open] summary::before{content:"−"}
+.opc-kp-more summary span{font-size:15px;font-weight:600;color:var(--k-muted)}
+.opc-kp-moregrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;padding:4px 14px 16px}
+.opc-kp-label{display:block;margin-bottom:6px;font-size:15px;font-weight:800;color:var(--k-navy)}
+.opc-kp-label output{font-weight:800;color:var(--k-blue2)}
+.opc-kp-hint{display:block;margin-top:6px;font-size:15px;line-height:1.45;color:var(--k-muted)}
+.opc-kp .opc-kp-toggle{min-height:48px;padding:0 16px;border:2px solid var(--k-blue);border-radius:12px;background:#fff;color:var(--k-blue2);font-weight:800;font-size:16px}
+.opc-kp .opc-kp-toggle:hover,.opc-kp .opc-kp-toggle:focus{background:var(--k-light);color:var(--k-blue2)}
+.opc-kp .opc-kp-toggle[aria-pressed=true]{background:var(--k-blue);color:#fff}
+.opc-kp-range input{display:block;width:100%;height:44px;accent-color:var(--k-blue)}
+.opc-kp-more .opc-kp-seg{border-color:#94a3b8}
+.opc-kp-more .opc-kp-seg button,.opc-kp .opc-kp-more .opc-kp-seg button:hover,.opc-kp .opc-kp-more .opc-kp-seg button:focus{background:#fff;color:var(--k-navy)}
+.opc-kp-more .opc-kp-seg button+button{border-left-color:#94a3b8}
+.opc-kp .opc-kp-more .opc-kp-seg button[aria-checked=true]{background:var(--k-blue);color:#fff}
+.opc-kp-field{display:flex;flex-direction:column;gap:4px;margin-top:10px;font-size:15px;font-weight:700;color:var(--k-navy)}
+.opc-kp-field select{min-height:44px;padding:0 10px;border:1px solid #94a3b8;border-radius:10px;background:#fff;color:var(--k-navy);font-size:15px}
+
+@media (max-width:420px){
+	.opc-kp-machine{padding:12px}
+	.opc-kp-keybig strong{font-size:44px}
+	.opc-kp .opc-kp-kbtn{min-height:72px;gap:6px}
+	.opc-kp .opc-kp-kbtn b{font-size:38px}
+	.opc-kp .opc-kp-kbtn span{font-size:16px}
+	.opc-kp .opc-kp-reset{min-width:70px;padding:6px}
+	.opc-kp-keys dd{font-size:16px}
+}

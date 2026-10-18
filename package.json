@@ -1,0 +1,21 @@
+{
+  "name": "karaokepitch",
+  "version": "1.0.0",
+  "description": "Client-side in-browser audio pitch shifter, karaoke key changer, and vocal reduction tool.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "karaoke",
+    "pitch-changer",
+    "pitch-shifter",
+    "key-transposer",
+    "vocal-reducer",
+    "web-audio-api",
+    "audio-dsp"
+  ],
+  "author": "KaraokePitch",
+  "license": "GPL-2.0-or-later"
+}

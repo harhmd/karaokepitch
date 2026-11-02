@@ -16,6 +16,11 @@
     "web-audio-api",
     "audio-dsp"
   ],
-  "author": "KaraokePitch",
+  "author": "harhmd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harhmd/karaokepitch.git"
+  },
+  "homepage": "https://github.com/harhmd/karaokepitch#readme",
   "license": "GPL-2.0-or-later"
 }

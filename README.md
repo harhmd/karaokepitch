@@ -89,7 +89,7 @@ gh repo create karaokepitch --public --source=. --remote=origin
 
 ### 3. Push to GitHub
 ```bash
-git remote add origin https://github.com/YOUR_USERNAME/karaokepitch.git
+git remote add origin https://github.com/harhmd/karaokepitch.git
 git push -u origin main
 ```
 
@@ -112,7 +112,7 @@ Docker provides the fastest, isolated deployment with Nginx:
    ```
 2. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/karaokepitch.git
+   git clone https://github.com/harhmd/karaokepitch.git
    cd karaokepitch
    ```
 3. Run with Docker Compose:
@@ -131,7 +131,7 @@ KaraokePitch is now live on port `80`!
    ```
 2. Clone into `/var/www/karaokepitch`:
    ```bash
-   sudo git clone https://github.com/YOUR_USERNAME/karaokepitch.git /var/www/karaokepitch
+   sudo git clone https://github.com/harhmd/karaokepitch.git /var/www/karaokepitch
    sudo chown -R www-data:www-data /var/www/karaokepitch
    ```
 3. Copy Nginx configuration:

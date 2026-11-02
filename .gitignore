@@ -1,3 +1,8 @@
+# Local credentials and scripts
+github-publish.js
+.token
+.env
+
 # Logs
 *.log
 npm-debug.log*

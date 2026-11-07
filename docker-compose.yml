@@ -6,7 +6,7 @@ services:
     container_name: karaokepitch_web
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "3000:80"
       - "80:80"
     environment:
       - NODE_ENV=production

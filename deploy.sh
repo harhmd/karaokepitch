@@ -41,11 +41,11 @@ if command -v node &> /dev/null; then
     if command -v pm2 &> /dev/null; then
         pm2 restart karaokepitch || pm2 start server.js --name karaokepitch
         pm2 save
-        echo "✅ KaraokePitch is running under PM2 on port 8080!"
+        echo "✅ KaraokePitch is running under PM2 on port 3000!"
     else
         echo "Starting in background with nohup..."
         nohup node server.js > server.log 2>&1 &
-        echo "✅ KaraokePitch running on port 8080 (PID $!)"
+        echo "✅ KaraokePitch running on port 3000 (PID $!)"
     fi
     exit 0
 fi

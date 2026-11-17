@@ -60,6 +60,11 @@
 .opc-yt-keypick{margin:0 0 12px}
 .opc-yt select{display:block;width:100%;min-height:48px;padding:8px 12px;border:1px solid #94a3b8;border-radius:10px;background:#fff;color:var(--yt-navy);font-size:16px;font-weight:600}
 .opc-yt-newkey{margin:6px 0 0;font-size:16px;font-weight:700;color:#fff}
+.opc-yt-vrrow{margin:0 0 12px}
+.opc-yt-vr{width:100%;min-height:48px;padding:8px 14px;border:1px solid #475569;border-radius:12px;background:var(--yt-navy2);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s ease}
+.opc-yt-vr:hover{background:#334155;border-color:#64748b}
+.opc-yt-vr[aria-pressed="true"]{background:var(--yt-cyan);color:var(--yt-navy);border-color:var(--yt-cyan);font-weight:800;box-shadow:0 0 12px rgba(34,184,240,.35)}
+.opc-yt-vr-hint{margin:4px 0 0;font-size:13px;line-height:1.4;color:#bae6fd}
 .opc-yt-live{border-top:1px solid #334155;padding-top:12px}
 .opc-yt-go{width:100%;min-height:54px;padding:8px 14px;border:0;border-radius:12px;background:var(--yt-blue);color:#fff;font-size:17px;font-weight:800}
 .opc-yt-go:hover{background:var(--yt-blue2)}

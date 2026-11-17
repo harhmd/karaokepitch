@@ -623,6 +623,16 @@
               </select>
               <p class="opc-yt-newkey" data-yt-newkey>New key: C (if the song is in C)</p>
             </div>
+
+            <!-- Karaoke On-the-Fly Vocal Removal -->
+            <div class="opc-yt-vrrow">
+              <span class="opc-yt-slabel">Karaoke mode <span>(remove vocal on the fly)</span></span>
+              <button type="button" class="opc-yt-vr" data-yt-vr aria-pressed="false" title="Cancel centered lead vocals on the fly for karaoke">
+                <span>🎤 Vocal reduce: <b>off</b></span>
+              </button>
+              <p class="opc-yt-hint opc-yt-vr-hint">Cancels centered lead vocals live while preserving bass (below 150 Hz) and stereo instruments.</p>
+            </div>
+
             <div class="opc-yt-live">
               <button type="button" class="opc-yt-go" data-yt-go>Start live pitch change</button>
               <div class="opc-yt-liverow" data-yt-liverow hidden>
@@ -676,6 +686,10 @@
           <div class="feature-item">
             <h3>🎸 Practice Along Instantly</h3>
             <p>Ideal for rehearsing with karaoke backing tracks, guitar tutorials, vocal warm-ups, or transposing a song into your preferred vocal range directly from YouTube.</p>
+          </div>
+          <div class="feature-item">
+            <h3>🎤 On-the-Fly Vocal Removal</h3>
+            <p>Toggle <strong>Karaoke mode</strong> to cancel centered lead vocals in real time using 4th-order cascaded biquad DSP with 150 Hz bass preservation, transforming any YouTube video into an instant karaoke track.</p>
           </div>
         </div>
       </div>

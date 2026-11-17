@@ -13,12 +13,13 @@
   - Real-time LED key shift indicator (`−6` to `+6`).
   - **Vocal Reduce**: Center-channel cancellation algorithm to strip vocals from stereo tracks while retaining bass and stereo instruments.
   - A/B instant audio comparison switch (`Original` vs. `New Key`).
-- 📺 **YouTube Live Pitch Changer & Karaoke Streamer**:
-  - Live real-time YouTube pitch changer using browser AudioWorklet DSP.
-  - **On-the-fly Vocal Removal (Karaoke Mode)**: Real-time center-channel cancellation with 4th-order 150 Hz biquad bass preservation inside the AudioWorklet DSP.
-  - Paste any YouTube link, Shorts, or video ID to embed and play.
+- 📺 **YouTube Live Pitch Changer, Instrumental Karaoke & Synchronized Lyrics**:
+  - **Paste any YouTube URL**, Shorts, or video ID to embed, stream, and transpose live.
+  - **On-the-fly Vocal Removal (Instrumental Karaoke)**: Real-time center-channel cancellation with 4th-order 150 Hz biquad bass preservation in the AudioWorklet DSP to mute vocals and keep instrumental backing.
+  - **Synchronized Karaoke Lyrics Screen**: Auto-fetches lyrics via LRCLIB, highlights active lines in real-time, auto-scrolls teleprompter style, and lets you click any lyric to seek the video.
+  - **Lyrics Timing Offset & Custom Lyrics**: Quick `±0.5s` sync offset controls, font sizing, manual search, and custom lyrics/LRC paste options.
   - Quick shifts (−12, −7, −5, 0, +5, +7, +12), fine-tuning cents, and custom song key selector.
-  - Synchronized floating remote window with semitone controls and instant Vocal Reduce toggle.
+  - Synchronized floating remote window with semitone controls and instant Voice Muted / Full toggle.
   - 100% in-browser audio routing without downloading or re-encoding video.
 - 🎛️ **Pro Pitch & Tempo Shifter**:
   - Continuous pitch shift range from **−24 to +24 semitones** (±2 full octaves).

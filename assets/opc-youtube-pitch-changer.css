@@ -61,6 +61,9 @@
 .opc-yt select{display:block;width:100%;min-height:48px;padding:8px 12px;border:1px solid #94a3b8;border-radius:10px;background:#fff;color:var(--yt-navy);font-size:16px;font-weight:600}
 .opc-yt-newkey{margin:6px 0 0;font-size:16px;font-weight:700;color:#fff}
 .opc-yt-vrrow{margin:0 0 12px}
+.opc-yt-vrtop{display:flex;justify-content:space-between;align-items:center;margin:0 0 4px}
+.opc-yt-vrtop .opc-yt-slabel{margin:0}
+.opc-yt-vrbadge{font-size:11px;font-weight:800;padding:2px 8px;border-radius:6px;background:rgba(74,222,128,.15);color:#4ade80;border:1px solid #4ade80;text-transform:uppercase;letter-spacing:.04em}
 .opc-yt-vr{width:100%;min-height:48px;padding:8px 14px;border:1px solid #475569;border-radius:12px;background:var(--yt-navy2);color:#fff;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .15s ease}
 .opc-yt-vr:hover{background:#334155;border-color:#64748b}
 .opc-yt-vr[aria-pressed="true"]{background:var(--yt-cyan);color:var(--yt-navy);border-color:var(--yt-cyan);font-weight:800;box-shadow:0 0 12px rgba(34,184,240,.35)}
@@ -96,3 +99,44 @@
 .opc-yt-range2{accent-color:var(--yt-blue)}
 .opc-yt-tip{margin:6px 0 0;font-size:15px;line-height:1.45;color:var(--yt-navy)}
 @media (max-width:380px){.opc-yt-keyrow{grid-template-columns:62px minmax(0,1fr) 62px}.opc-yt-read output{font-size:40px}.opc-yt-presets button{font-size:14px}}
+
+/* Karaoke Lyrics Card & Stage */
+.opc-yt-lyrics-card{margin-top:16px;background:var(--yt-navy);border:1px solid #334155;border-radius:16px;padding:16px;color:#e2e8f0;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.opc-yt-lyrics-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid #334155}
+.opc-yt-lyrics-title-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.opc-yt-lyrics-title{margin:0;font-size:18px;font-weight:800;color:#fff;display:flex;align-items:center;gap:6px}
+.opc-yt-lyrics-badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:12px;background:#1e293b;color:#94a3b8;border:1px solid #475569}
+.opc-yt-lyrics-badge[data-state="synced"]{background:rgba(34,184,240,.15);color:#38bdf8;border-color:#38bdf8}
+.opc-yt-lyrics-badge[data-state="plain"]{background:rgba(251,191,36,.15);color:#fbbf24;border-color:#fbbf24}
+.opc-yt-lyrics-badge[data-state="loading"]{background:rgba(148,163,184,.15);color:#cbd5e1}
+.opc-yt-lyrics-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.opc-yt-toolbar-label{font-size:13px;font-weight:700;color:#94a3b8}
+.opc-yt-lrc-offset-wrap,.opc-yt-lrc-size-wrap{display:inline-flex;align-items:center;gap:4px;background:#1e293b;padding:2px 6px;border-radius:8px;border:1px solid #334155}
+.opc-yt-offset-val{font-size:12px;font-weight:800;color:#38bdf8;min-width:36px;text-align:center;font-variant-numeric:tabular-nums}
+.opc-yt-tb-btn{background:#0f172a;border:1px solid #475569;color:#e2e8f0;border-radius:6px;padding:3px 8px;font-size:12px;font-weight:700;cursor:pointer;transition:all .15s ease}
+.opc-yt-tb-btn:hover{background:#334155;color:#fff}
+.opc-yt-tb-btn.active{background:var(--yt-cyan);color:var(--yt-navy);border-color:var(--yt-cyan)}
+.opc-yt-tb-action{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s ease}
+.opc-yt-tb-action:hover{background:#334155;border-color:#64748b;color:#fff}
+.opc-yt-lyrics-search-bar,.opc-yt-lyrics-custom-bar{margin-top:12px;padding:12px;background:#1e293b;border-radius:10px;border:1px solid #334155}
+.opc-yt-lyrics-search-row{display:flex;gap:8px;align-items:center}
+.opc-yt-lyrics-search-bar input,.opc-yt-lyrics-custom-bar textarea{width:100%;padding:8px 12px;border-radius:8px;border:1px solid #475569;background:#0f172a;color:#fff;font-family:inherit;font-size:14px;box-sizing:border-box}
+.opc-yt-lyrics-search-bar input:focus,.opc-yt-lyrics-custom-bar textarea:focus{outline:2px solid var(--yt-cyan)}
+.opc-yt-lyrics-results{margin-top:10px;max-height:160px;overflow-y:auto;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:6px}
+.opc-yt-lrc-result-item{padding:8px 10px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#cbd5e1;transition:background .15s ease}
+.opc-yt-lrc-result-item:hover{background:#334155;color:#fff}
+.opc-yt-lrc-result-item strong{color:#38bdf8}
+.opc-yt-lyrics-viewport{margin-top:12px;height:380px;overflow-y:auto;padding:24px 16px;border-radius:12px;background:#090e1a;border:1px solid #1e293b;position:relative;scroll-behavior:smooth;text-align:center}
+.opc-yt-lyrics-content{display:flex;flex-direction:column;gap:14px;padding:40px 0}
+.opc-yt-lrc-line{padding:10px 16px;border-radius:12px;font-size:17px;line-height:1.5;font-weight:600;color:#64748b;cursor:pointer;transition:all .25s cubic-bezier(.4,0,.2,1);user-select:none}
+.opc-yt-lrc-line:hover{color:#cbd5e1;background:rgba(255,255,255,.05)}
+.opc-yt-lrc-line.is-active{color:#fff;font-size:22px;font-weight:800;background:linear-gradient(90deg,rgba(0,103,255,.25),rgba(34,184,240,.35),rgba(0,103,255,.25));border:1px solid rgba(34,184,240,.6);box-shadow:0 0 20px rgba(34,184,240,.3),inset 0 0 12px rgba(34,184,240,.2);transform:scale(1.03);text-shadow:0 2px 10px rgba(34,184,240,.6)}
+.opc-yt-lyrics-viewport[data-size="sm"] .opc-yt-lrc-line{font-size:15px}
+.opc-yt-lyrics-viewport[data-size="sm"] .opc-yt-lrc-line.is-active{font-size:18px}
+.opc-yt-lyrics-viewport[data-size="md"] .opc-yt-lrc-line{font-size:17px}
+.opc-yt-lyrics-viewport[data-size="md"] .opc-yt-lrc-line.is-active{font-size:22px}
+.opc-yt-lyrics-viewport[data-size="lg"] .opc-yt-lrc-line{font-size:20px}
+.opc-yt-lyrics-viewport[data-size="lg"] .opc-yt-lrc-line.is-active{font-size:26px}
+.opc-yt-lrc-empty{padding:40px 20px;color:#94a3b8;max-width:500px;margin:0 auto}
+.opc-yt-lrc-empty-msg{font-size:16px;line-height:1.5;color:#cbd5e1;margin-bottom:8px}
+.opc-yt-lrc-empty-sub{font-size:14px;color:#38bdf8}

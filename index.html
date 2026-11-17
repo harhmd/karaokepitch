@@ -626,9 +626,12 @@
 
             <!-- Karaoke On-the-Fly Vocal Removal -->
             <div class="opc-yt-vrrow">
-              <span class="opc-yt-slabel">Karaoke mode <span>(remove vocal on the fly)</span></span>
+              <div class="opc-yt-vrtop">
+                <span class="opc-yt-slabel">Vocal removal <span>(instrumental karaoke)</span></span>
+                <span class="opc-yt-vrbadge" data-yt-vrbadge hidden>🎶 Voice Removed (Instrumental)</span>
+              </div>
               <button type="button" class="opc-yt-vr" data-yt-vr aria-pressed="false" title="Cancel centered lead vocals on the fly for karaoke">
-                <span>🎤 Vocal reduce: <b>off</b></span>
+                <span>🎤 Remove Voice: <b>off</b> (Full Song)</span>
               </button>
               <p class="opc-yt-hint opc-yt-vr-hint">Cancels centered lead vocals live while preserving bass (below 150 Hz) and stereo instruments.</p>
             </div>
@@ -640,6 +643,72 @@
                 <button type="button" class="opc-yt-stop" data-yt-stop>Stop</button>
               </div>
               <p class="opc-yt-status" data-yt-status aria-live="polite">Off. Load a video, press play, then start the live pitch change.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Synchronized Karaoke Lyrics Display -->
+        <div class="opc-yt-lyrics-card" data-yt-lyrics-card>
+          <div class="opc-yt-lyrics-header">
+            <div class="opc-yt-lyrics-title-group">
+              <h3 class="opc-yt-lyrics-title">
+                <span class="opc-yt-lyrics-icon">🎶</span>
+                <span data-yt-lyrics-title>Karaoke Lyrics</span>
+              </h3>
+              <span class="opc-yt-lyrics-badge" data-yt-lyrics-badge data-state="idle">Waiting for song...</span>
+            </div>
+
+            <!-- Lyrics Quick Controls -->
+            <div class="opc-yt-lyrics-toolbar">
+              <!-- Sync Offset -->
+              <div class="opc-yt-lrc-offset-wrap" title="Nudge lyrics timing if video intro has a gap">
+                <span class="opc-yt-toolbar-label">Sync:</span>
+                <button type="button" class="opc-yt-tb-btn" data-yt-lrc-nudge="-0.5">−0.5s</button>
+                <span class="opc-yt-offset-val" data-yt-lrc-offset>0.0s</span>
+                <button type="button" class="opc-yt-tb-btn" data-yt-lrc-nudge="+0.5">+0.5s</button>
+                <button type="button" class="opc-yt-tb-btn" data-yt-lrc-nudge="0" title="Reset offset to 0">0s</button>
+              </div>
+
+              <!-- Font Size -->
+              <div class="opc-yt-lrc-size-wrap">
+                <span class="opc-yt-toolbar-label">Size:</span>
+                <button type="button" class="opc-yt-tb-btn" data-yt-lrc-size="sm">A-</button>
+                <button type="button" class="opc-yt-tb-btn active" data-yt-lrc-size="md">A</button>
+                <button type="button" class="opc-yt-tb-btn" data-yt-lrc-size="lg">A+</button>
+              </div>
+
+              <!-- Search & Custom Buttons -->
+              <button type="button" class="opc-yt-tb-action" data-yt-lrc-search-toggle>🔍 Search</button>
+              <button type="button" class="opc-yt-tb-action" data-yt-lrc-custom-toggle>✏️ Custom</button>
+            </div>
+          </div>
+
+          <!-- Search bar (collapsible) -->
+          <div class="opc-yt-lyrics-search-bar" data-yt-lrc-search-bar hidden>
+            <div class="opc-yt-lyrics-search-row">
+              <input type="text" placeholder="Search song or artist (e.g. Queen Bohemian Rhapsody)..." data-yt-lrc-query>
+              <button type="button" class="opc-yt-btn" data-yt-lrc-search-do style="min-height:40px;padding:0 14px;">Search</button>
+              <button type="button" class="opc-yt-tb-btn" data-yt-lrc-search-cancel style="min-height:40px;padding:0 12px;">Close</button>
+            </div>
+            <div class="opc-yt-lyrics-results" data-yt-lrc-results hidden></div>
+          </div>
+
+          <!-- Custom lyrics drawer (collapsible) -->
+          <div class="opc-yt-lyrics-custom-bar" data-yt-lrc-custom-bar hidden>
+            <textarea placeholder="Paste your lyrics here (plain text or [00:12.34] synchronized LRC format)..." rows="6" data-yt-lrc-custom-text></textarea>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <button type="button" class="opc-yt-btn" data-yt-lrc-custom-apply style="min-height:38px;padding:0 14px;">Apply Lyrics</button>
+              <button type="button" class="opc-yt-tb-btn" data-yt-lrc-custom-cancel style="min-height:38px;padding:0 12px;">Cancel</button>
+            </div>
+          </div>
+
+          <!-- The Teleprompter / Scrolling Lyrics Area -->
+          <div class="opc-yt-lyrics-viewport" data-yt-lrc-viewport data-size="md">
+            <div class="opc-yt-lyrics-content" data-yt-lrc-content>
+              <div class="opc-yt-lrc-empty">
+                <p class="opc-yt-lrc-empty-msg">Paste a YouTube link above and click <b>Load video</b>.</p>
+                <p class="opc-yt-lrc-empty-sub">Lyrics will synchronize automatically with the video. Click any lyric line to jump in the song, and toggle <b>Remove Voice</b> above for instrumental karaoke!</p>
+              </div>
             </div>
           </div>
         </div>

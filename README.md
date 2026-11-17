@@ -52,11 +52,11 @@ npm start
 # or
 node server.js
 ```
-Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+Open **[http://localhost:3001](http://localhost:3001)** in your browser.
 
 ### Run with Python
 ```bash
-python -m http.server 3000
+python -m http.server 3001
 ```
 
 ---
